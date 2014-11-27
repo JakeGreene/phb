@@ -1,1 +1,2 @@
-GET    /                                controllers.HandBook.index()
+GET    /        controllers.HandBook.index()
+GET    /phb     controllers.HandBook.phb()

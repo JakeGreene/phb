@@ -1,4 +1,19 @@
-@()
+@(races: Seq[Race], classes: Seq[DnDClass])
+@main(title = "Create PHB") {
+  <h1>Personal Player's Handbook</h1>
+  
+  <p>Choose your Race</p>
+  <select class="form-control">
+    @for(race <- races) {
+      <option value="@race.name">@race.name</option>
+    }
+  </select>
 
-<h1>Personal Player's Handbook</h1>
-<p>Create a PHB just for you!</p>
+  <p>Choose your Class</p>
+  <select class="form-control">
+    @for(dndClass <- classes) {
+      <option value="@dndClass.name">@dndClass.name</option>
+    }
+  </select>
+  <p><a class="btn btn-default" href="/phb" target="_blank">Create Player Handbook</a></p>
+}
