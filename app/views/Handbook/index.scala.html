@@ -2,18 +2,26 @@
 @main(title = "Create PHB") {
   <h1>Personal Player's Handbook</h1>
   
-  <p>Choose your Race</p>
-  <select class="form-control">
-    @for(race <- races) {
-      <option value="@race.name">@race.name</option>
-    }
-  </select>
+  <h3>Choose your Races</h3>
+  @for(raceGroup <- races.grouped(3)) {
+    <p>
+      @checkboxes(raceGroup.map(_.name))
+    </p>
+  }
 
-  <p>Choose your Class</p>
-  <select class="form-control">
-    @for(dndClass <- classes) {
-      <option value="@dndClass.name">@dndClass.name</option>
-    }
-  </select>
+  <h3>Choose your Classes</h3>
+  @for(classGroup <- classes.grouped(3)) {
+    <p>
+      @checkboxes(classGroup.map(_.name))
+    </p>
+  }
   <p><a class="btn btn-default" href="/phb" target="_blank">Create Player Handbook</a></p>
 }
+
+ @checkboxes(options: Seq[String]) = {
+    @for(o <- options) {
+      <label class="checkbox-inline">
+        <input type="checkbox" value="@o.toString()">@o.toString() 
+      </label>
+    }
+  }
