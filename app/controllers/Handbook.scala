@@ -5,7 +5,7 @@ import org.apache.pdfbox.pdmodel._
 import org.apache.pdfbox.pdmodel.edit._
 import org.apache.pdfbox.pdmodel.font._
 import play.api.libs.iteratee.Enumerator
-import play.api.libs.concurrent.Execution.Implicits._
+//import play.api.libs.concurrent.Execution.Implicits._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import play.api.db.slick.DB
@@ -21,9 +21,11 @@ object HandBook extends Controller {
   
   implicit val spellReads = Json.reads[Spell]
   val Spells = TableQuery[SpellsTable]
+  implicit val classReads = Json.reads[DnDClass]
+  val DnDClasses = TableQuery[ClassTable]
   
   val races = Seq("Tiefling", "Dwarf", "Human", "Halfling", "Half-Elf", "Half-Orc", "Elf", "Dragonborn").sorted.map(Race)
-  val classes = Seq("Warlock", "Barbarian", "Fighter", "Wizard", "Sorcerer", "Cleric").sorted.map(DnDClass)
+  //val classes = Seq("Warlock", "Barbarian", "Fighter", "Wizard", "Sorcerer", "Cleric").sorted.map(c => DnDClass(None, c))
   
   val fonts = BookFont(Font(PDType1Font.TIMES_BOLD, 14),
                        Font(PDType1Font.TIMES_ITALIC, 12),
@@ -37,16 +39,19 @@ object HandBook extends Controller {
 //  }
 //  val document = builder.toPDF()
   
-  def index() = Action(Ok(views.html.Handbook.index(races, classes)))
+  def index() = Action {
+    DB.withSession { implicit session => 
+      val classes = DnDClasses.run
+      Ok(views.html.Handbook.index(races, classes))
+    }
+  }
   
-  def phb() = Action {
+  def phb() = DBAction { implicit rs =>
     val builder = new HandbookBuilder(fonts, 55, 13, 2)
     builder.start()
-    DB.withSession { implicit session =>
-      Spells.foreach { spell =>
-        builder.addSpell(spell)
-      }  
-    }
+    Spells.foreach { spell =>
+      builder.addSpell(spell)
+    }  
     val document = builder.toPDF
     Ok.chunked(Enumerator.outputStream { os =>
       document.save(os)
@@ -57,12 +62,9 @@ object HandBook extends Controller {
     )
   }
   
-  def getSpells() = Action {
-    DB.withSession { implicit session =>
-      val all = Spells.run // Get all spells
-      //Ok(all..mkString(" "))
-      Ok(all.mkString("\n"))
-    }
+  def getSpells() = DBAction { implicit rs =>
+    val spells = Spells.list
+    Ok(spells.mkString("\n"))
   }
   
   def addSpell() = Action(parse.json) { request =>
@@ -72,6 +74,21 @@ object HandBook extends Controller {
         Spells.insert(s)
       }
       Ok(s"Stored Spell $s")      
+    }
+  }
+  
+  def getClasses() = DBAction { implicit rs =>
+    val classes = DnDClasses.list
+    Ok(classes.mkString("\n"))
+  }
+  
+  def addClass() = Action(parse.json) { request =>
+    val dndClass = request.body.asOpt[DnDClass]
+    dndClass.fold(BadRequest("Not a valid class")) { c =>
+      DB.withSession { implicit session =>
+        DnDClasses.insert(c)  
+      } 
+      Ok(s"Stored Class $c")
     }
   }
 }

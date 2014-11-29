@@ -1,3 +1,3 @@
 package models
 
-case class DnDClass(name: String)
+case class DnDClass(id: Option[Int], name: String)
