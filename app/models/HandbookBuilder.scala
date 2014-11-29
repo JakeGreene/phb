@@ -7,6 +7,7 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
   val document = new PDDocument()
   var page: Option[PDPage] = None
   var pageStream: Option[PDPageContentStream] = None
+  var currentFont: Option[Font] = None
   
   val borderXSize = 30
   val borderYSize = 50
@@ -16,28 +17,26 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
   var y = 0
   var onLeft = true
   
-  freshPage()
-  
   def stream = pageStream.get
+  def font = currentFont.get
+  
+  /**
+   * The builder has to be started before anything can be added
+   */
+  def start(): Unit = {
+    freshPage()
+  }
   
   private def freshPage(): Unit = {
-    for {
-      p <- page
-      s <- pageStream
-    } {
-      document.addPage(p)
-      s.endText()
-      s.close()
-    }
-    
+    closePage()
     val p = new PDPage()
     page = Some(p)
     val s = new PDPageContentStream(document, p)
-    x = 0
-    y = 0
-    onLeft = true
     s.beginText()
     pageStream = Some(s)
+    currentFont.foreach(setFont)
+    x = 0
+    y = 0
     pageTopLeft()
   }
   
@@ -60,28 +59,28 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
   }
   
   private def titleLine(name: String): Unit = {
-    stream.setFont(fonts.title.style, fonts.title.size)
+    setFont(fonts.title)
     stream.setNonStrokingColor(125, 0, 0)
     stream.drawString(name)
     stream.setNonStrokingColor(0, 0, 0)
   }
   
   private def subTitleLine(name: String): Unit = {
-    stream.setFont(fonts.sub.style, fonts.sub.size)
+    setFont(fonts.sub)
     newline()
     stream.drawString(name)
   }
   
   private def headerLine(title: String, value: String): Unit = {
-    stream.setFont(fonts.header.style, fonts.header.size)
+    setFont(fonts.header)
     newline()
     stream.drawString(title + ": ")
-    stream.setFont(fonts.body.style, fonts.body.size)
+    setFont(fonts.body)
     stream.drawString(value)  
   }
   
   private def bodySection(text: String): Unit = {
-    stream.setFont(fonts.body.style, fonts.body.size)
+    setFont(fonts.body)
     val words = text.split(" ")
     val paragraph = words.foldLeft(Seq[String]()) { case (acc, word) =>
       if (acc.size > 0 && acc.head.size + word.size < columnWidth) (acc.head + " " + word) +: acc.tail
@@ -108,25 +107,29 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
   }
   
   private def newline(height: Int = lineHeight): Unit = {
-    //stream.moveTextPositionByAmount(0, -height)
     moveDown(height)
   }
   
   private def buffer(height: Int = bufferHeight): Unit = {
-    //stream.moveTextPositionByAmount(0, -height)
     moveDown(height)
   }  
   
   private def moveDown(deltaY: Int): Unit = {
     if (y - deltaY < borderYSize) {
-      pageTopRight()
+      if (onLeft) pageTopRight()
+      else freshPage()
     } else {
       stream.moveTextPositionByAmount(0, -deltaY)
       y -= deltaY
     }
   }
   
-  def toPDF(): PDDocument = {
+  private def setFont(font: Font): Unit = {
+    stream.setFont(font.style, font.size)
+    currentFont = Some(font)
+  }
+  
+  private def closePage(): Unit = {
     for {
       p <- page
       s <- pageStream
@@ -135,6 +138,10 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
       s.endText()
       s.close()
     }
+  }
+  
+  def toPDF(): PDDocument = {
+    closePage()
     document
   }
 }
