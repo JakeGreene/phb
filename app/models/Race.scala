@@ -1,3 +1,3 @@
 package models
 
-case class Race(name: String)
+case class Race(id: Option[Int], name: String)

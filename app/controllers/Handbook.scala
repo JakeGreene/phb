@@ -23,25 +23,18 @@ object HandBook extends Controller {
   val Spells = TableQuery[SpellsTable]
   implicit val classReads = Json.reads[DnDClass]
   val DnDClasses = TableQuery[ClassTable]
-  
-  val races = Seq("Tiefling", "Dwarf", "Human", "Halfling", "Half-Elf", "Half-Orc", "Elf", "Dragonborn").sorted.map(Race)
-  //val classes = Seq("Warlock", "Barbarian", "Fighter", "Wizard", "Sorcerer", "Cleric").sorted.map(c => DnDClass(None, c))
+  implicit val raceReads = Json.reads[Race]
+  val Races = TableQuery[RacesTable]
   
   val fonts = BookFont(Font(PDType1Font.TIMES_BOLD, 14),
                        Font(PDType1Font.TIMES_ITALIC, 12),
                        Font(PDType1Font.TIMES_BOLD, 12),
                        Font(PDType1Font.TIMES_ROMAN, 12))
-//  val builder = new HandbookBuilder(fonts, 55, 13, 2)
-//  val acid = Spell(Some(0), "Acid Splash", "Conjuration cantrip", "1 action", "60 feet", "V, S", "Instantaneous", """You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage. This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).""")
-//  builder.start()
-//  for (i <- (1 to 30)) {
-//    builder.addSpell(acid)  
-//  }
-//  val document = builder.toPDF()
   
   def index() = Action {
     DB.withSession { implicit session => 
       val classes = DnDClasses.run
+      val races = Races.run
       Ok(views.html.Handbook.index(races, classes))
     }
   }
@@ -89,6 +82,21 @@ object HandBook extends Controller {
         DnDClasses.insert(c)  
       } 
       Ok(s"Stored Class $c")
+    }
+  }
+  
+  def getRaces() = DBAction { implicit rs =>
+    val races = Races.list
+    Ok(races.mkString("\n"))
+  }
+  
+  def addRace() = Action(parse.json) { request =>
+    val race = request.body.asOpt[Race]
+    race.fold(BadRequest("Not a valid Race")) { r =>
+      DB.withSession { implicit session =>
+        Races.insert(r)  
+      }
+      Ok(s"Stored Race $r")
     }
   }
 }
