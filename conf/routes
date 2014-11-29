@@ -1,2 +1,4 @@
 GET    /        controllers.HandBook.index()
 GET    /phb     controllers.HandBook.phb()
+GET    /spells  controllers.HandBook.getSpells()
+POST   /spells  controllers.HandBook.addSpell()
