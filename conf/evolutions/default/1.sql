@@ -1,12 +1,21 @@
 # --- !Ups
 
-create table CLASSES (CLASS_ID SERIAL PRIMARY KEY, NAME TEXT NOT NULL);
-create table RACES (RACE_ID SERIAL PRIMARY KEY, NAME TEXT NOT NULL);
-create table SPELLS (SPELL_ID SERIAL PRIMARY KEY, NAME TEXT NOT NULL, KIND TEXT NOT NULL, TIME TEXT NOT NULL, RANGE TEXT NOT NULL,COMPONENTS TEXT NOT NULL,DURATION TEXT NOT NULL,BODY TEXT NOT NULL);
+CREATE TABLE classes (class_id SERIAL PRIMARY KEY, 
+                      name TEXT NOT NULL);
+CREATE TABLE races (race_id SERIAL PRIMARY KEY, 
+                    name TEXT NOT NULL);
+CREATE TABLE spells (spell_id SERIAL PRIMARY KEY, 
+                     name TEXT NOT NULL, 
+                     kind TEXT NOT NULL, 
+                     time TEXT NOT NULL, 
+                     range TEXT NOT NULL, 
+                     components TEXT NOT NULL, 
+                     duration TEXT NOT NULL, 
+                     body TEXT NOT NULL);
 
 # --- !Downs
 
-drop table SPELLS;
-drop table RACES;
-drop table CLASSES;
+drop table spells;
+drop table races;
+drop table classes;
 
