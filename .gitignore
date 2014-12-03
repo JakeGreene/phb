@@ -7,4 +7,3 @@ target/
 /bin
 .DS_STORE
 .idea
-conf/evolutions/
