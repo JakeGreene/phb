@@ -19,10 +19,15 @@ import play.api.Play.current
 object HandBook extends Controller {
   
   implicit val spellReads = Json.reads[Spell]
+  implicit val spellWrites = Json.writes[Spell]
   val Spells = TableQuery[SpellsTable]
+
   implicit val classReads = Json.reads[DnDClass]
+  implicit val classWrites = Json.writes[DnDClass]
   val DnDClasses = TableQuery[ClassTable]
+  
   implicit val raceReads = Json.reads[Race]
+  implicit val raceWrites = Json.writes[Race]
   val Races = TableQuery[RacesTable]
   
   val fonts = BookFont(Font(PDType1Font.TIMES_BOLD, 14),
@@ -54,48 +59,30 @@ object HandBook extends Controller {
     )
   }
   
-  def getSpells() = DBAction { implicit rs =>
-    val spells = Spells.list
-    Ok(spells.mkString("\n"))
+  def getSpells() = getAll(Spells)
+  
+  def addSpell() = addTo(Spells)
+  
+  def getClasses() = getAll(DnDClasses)
+  
+  def addClass() = addTo(DnDClasses)
+  
+  def getRaces() = getAll(Races)
+  
+  def addRace() = addTo(Races)
+  
+  private def getAll[T: Writes](access: TableQuery[_ <: Table[T]]) = DBAction { implicit rs =>
+    val all = access.list
+    Ok(Json.toJson(all))
   }
   
-  def addSpell() = Action(parse.json) { request =>
-    val spell = request.body.asOpt[Spell]
-    spell.fold(BadRequest("Not a valid spell")) { s =>
+  private def addTo[T: Reads](access: TableQuery[_ <: Table[T]]) = Action(parse.json) { request =>
+    val thing = request.body.asOpt[T]
+    thing.fold(BadRequest("Not a valid input")) { t =>
       DB.withSession { implicit session =>
-        Spells.insert(s)
+        access.insert(t)
       }
-      Ok(s"Stored Spell $s")      
-    }
-  }
-  
-  def getClasses() = DBAction { implicit rs =>
-    val classes = DnDClasses.list
-    Ok(classes.mkString("\n"))
-  }
-  
-  def addClass() = Action(parse.json) { request =>
-    val dndClass = request.body.asOpt[DnDClass]
-    dndClass.fold(BadRequest("Not a valid class")) { c =>
-      DB.withSession { implicit session =>
-        DnDClasses.insert(c)  
-      } 
-      Ok(s"Stored Class $c")
-    }
-  }
-  
-  def getRaces() = DBAction { implicit rs =>
-    val races = Races.list
-    Ok(races.mkString("\n"))
-  }
-  
-  def addRace() = Action(parse.json) { request =>
-    val race = request.body.asOpt[Race]
-    race.fold(BadRequest("Not a valid Race")) { r =>
-      DB.withSession { implicit session =>
-        Races.insert(r)  
-      }
-      Ok(s"Stored Race $r")
+      Ok(s"Stored thing $t")
     }
   }
 }
