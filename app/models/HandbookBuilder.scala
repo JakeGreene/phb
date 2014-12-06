@@ -74,9 +74,10 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
   private def headerLine(title: String, value: String): Unit = {
     setFont(fonts.header)
     newline()
-    stream.drawString(title + ": ")
+    val titleBlock = title + ": "
+    stream.drawString(titleBlock)
     setFont(fonts.body)
-    stream.drawString(value)  
+    drawString(value, titleBlock.size)  
   }
   
   private def bodySection(text: String): Unit = {
@@ -127,6 +128,24 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
   private def setFont(font: Font): Unit = {
     stream.setFont(font.style, font.size)
     currentFont = Some(font)
+  }
+  
+  private def drawString(s: String, initialOffset: Int = 0): Unit = {
+    val words = s.split(" ")
+    /*
+     * This first line needs to account for the initialOffset
+     */
+    val paragraph = words.foldLeft(Seq[String]()) { case (acc, word) =>
+      if (acc.size == 1 && (acc.head.size + word.size < columnWidth - initialOffset)) (acc.head + " " + word) +: acc.tail
+      else if (acc.size > 1 && acc.head.size + word.size < columnWidth) (acc.head + " " + word) +: acc.tail
+      else word +: acc
+    }
+    val lines = paragraph.reverse
+    lines.headOption.foreach(stream.drawString(_))
+    for (line <- lines.tail) {
+      newline()
+      stream.drawString(line)
+    }
   }
   
   private def closePage(): Unit = {
