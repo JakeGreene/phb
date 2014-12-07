@@ -46,7 +46,11 @@ object HandBook extends Controller {
   def phb() = DBAction { implicit rs =>
     val builder = new HandbookBuilder(fonts, 55, 13, 2)
     builder.start()
-    Spells.foreach { spell =>
+    val spellsByName = Spells.list.sortWith { case (a, b) =>
+      a.name < b.name
+    }
+    
+    spellsByName.foreach { spell =>
       builder.addSpell(spell)
     }  
     val document = builder.toPDF
