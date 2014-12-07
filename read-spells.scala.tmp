@@ -1,0 +1,37 @@
+import scala.io.Source
+import java.io._
+import models._
+import play.api.libs.json._
+
+val spellLines = Source.fromFile("spells-final.txt").mkString.split("\n\n\n")
+
+def splitAlong(full: String, sep: String): (String, String) = {
+  val idx = full.indexOfSlice(sep)
+  full.splitAt(idx)
+}
+
+val CAST = "Casting Time"
+val RANGE = "Range"
+val COMP = "Components"
+val DUR = "Duration"
+
+def extractSpell(full: String): Spell = {
+  val (name, lessName) = full.span(_ != '\n') match { case (n, other) => (n.trim, other.tail) }
+  val (desc, lessDesc) = lessName.span(_ != '\n') match { case (d, other) => (d.trim, other.tail) }
+  val (time, lessTime) = splitAlong(lessDesc.stripPrefix(s"${CAST}: "), RANGE) match { case (t, l) => (t.trim, l) }
+  val (range, lessRange) = splitAlong(lessTime.stripPrefix(s"${RANGE}: "), COMP) match { case (t, l) => (t.trim, l) }
+  val (comp, lessComp) = splitAlong(lessRange.stripPrefix(s"${COMP}: "), DUR) match { case (t, l) => (t.trim, l) }
+  val (dur, lessDur) = splitAlong(lessComp.stripPrefix(s"${DUR}: "), "\n") match { case (t, l) => (t.trim, l) }
+  val body = lessDur.stripPrefix(s"{DUR}: ").replace("\n", " ")
+  Spell(None, name, desc, time, range, comp, dur, body)
+}
+implicit val spellWrites = Json.writes[Spell]
+val spellData = spellLines.map(extractSpell)
+val spellJson = spellData.map(d => Json.toJson(d))
+def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit) {
+  val p = new java.io.PrintWriter(f)
+  try { op(p) } finally { p.close() }
+}
+printToFile(new File("spell-json.txt")) { p =>
+  spellJson.foreach(j => p.println(j.toString))
+}
