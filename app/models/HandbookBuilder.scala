@@ -12,7 +12,7 @@ class HandbookBuilder(fonts: BookFont, columnWidth: Int, lineHeight: Int, buffer
   val borderXSize = 30
   val borderYSize = 50
   val pageHeight = 820
-  val rightColumnX = 330
+  val rightColumnX = 320
   var x = 0
   var y = 0
   var onLeft = true

@@ -44,7 +44,7 @@ object HandBook extends Controller {
   }
   
   def phb() = DBAction { implicit rs =>
-    val builder = new HandbookBuilder(fonts, 55, 13, 2)
+    val builder = new HandbookBuilder(fonts, 52, 13, 2)
     builder.start()
     val spellsByName = Spells.list.sortWith { case (a, b) =>
       a.name < b.name
