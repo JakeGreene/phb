@@ -26,6 +26,8 @@ object HandBook extends Controller {
   implicit val classWrites = Json.writes[DnDClass]
   val DnDClasses = TableQuery[ClassTable]
   
+  val ClassSpells = TableQuery[ClassSpellsTable]
+  
   implicit val raceReads = Json.reads[Race]
   implicit val raceWrites = Json.writes[Race]
   val Races = TableQuery[RacesTable]
@@ -64,15 +66,34 @@ object HandBook extends Controller {
   }
   
   def getSpells() = getAll(Spells)
-  
   def addSpell() = addTo(Spells)
   
   def getClasses() = getAll(DnDClasses)
-  
   def addClass() = addTo(DnDClasses)
   
-  def getRaces() = getAll(Races)
+  def getClassSpells(classId: Int) = DBAction { implicit rs =>
+    val spells = for {
+      dndClass <- DnDClasses 
+      if dndClass.id === classId
+      classSpell <- ClassSpells 
+      if classSpell.classId === dndClass.id
+      spell <- Spells 
+      if spell.id === classSpell.spellId
+    } yield spell
+    Ok(Json.toJson(spells.list))
+  }
   
+  def addClassSpell(classId: Int) = Action(parse.json) { request =>
+    val spellData = request.body
+    val spellId = (spellData \ "id").as[Int]
+    val level = (spellData \ "level").as[Int]
+    DB.withSession { implicit session =>
+      ClassSpells.insert(ClassSpell(classId, spellId, level))  
+    }
+    Ok(s"Stored spell $spellId")
+  }
+  
+  def getRaces() = getAll(Races)
   def addRace() = addTo(Races)
   
   private def getAll[T: Writes](access: TableQuery[_ <: Table[T]]) = DBAction { implicit rs =>
