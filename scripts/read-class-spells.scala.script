@@ -1,0 +1,88 @@
+import scala.io.Source
+import scala.slick.driver.PostgresDriver.simple._
+
+type Level = Int
+type SpellName = String
+case class ClassData(name: String, spells: Map[Level, Seq[SpellName]])
+val levelList = Source.fromFile("data/class-spells.txt").getLines.toSeq
+
+def parseSpells(line: Seq[String]): Map[Level, Seq[SpellName]] = {
+  var curLevel = 0
+  var spellsByLevel = Map[Level, Seq[SpellName]]()
+  for (l <- line) {
+    if (l.head == '+') {
+      curLevel = l.tail.toInt
+    } else {
+      val curSpells = spellsByLevel.getOrElse(curLevel, Seq())
+      spellsByLevel += curLevel -> (curSpells :+ l)
+    }
+  }
+  spellsByLevel
+}
+
+def parseClassData(lines: Seq[String]): ClassData = {
+   require(lines.nonEmpty)
+   require(lines(0).nonEmpty)
+   require(lines(0).head == '#')
+   val className = lines(0).tail
+   val spellsByLevel = lines.tail
+   val spells = parseSpells(spellsByLevel)
+   ClassData(className, spells)
+}
+
+val bardData = parseClassData(levelList)
+
+case class DnDClass(id: Option[Int], name: String)
+
+class DnDClassTable(tag: Tag) extends Table[DnDClass](tag, "classes") {
+  def id = column[Int]("class_id", O.PrimaryKey, O.AutoInc)
+  def name = column[String]("name", O.NotNull)
+  def * = (id.?, name) <> (DnDClass.tupled, DnDClass.unapply)
+}
+
+val ClassAccess = TableQuery[DnDClassTable]
+
+case class Spell(id: Option[Int], name: String, desc: String, time: String, range: String, comp: String, duration: String, body: String)
+
+class SpellsTable(tag: Tag) extends Table[Spell](tag, "spells") {
+  def id = column[Int]("spell_id", O.PrimaryKey, O.AutoInc)
+  def name = column[String]("name", O.NotNull)
+  def kind = column[String]("kind", O.NotNull)
+  def time = column[String]("time", O.NotNull)
+  def range = column[String]("range", O.NotNull)
+  def components = column[String]("components", O.NotNull)
+  def duration = column[String]("duration", O.NotNull)
+  def body = column[String]("body", O.NotNull)
+  def * = (id.?, name, kind, time, range, components, duration, body) <> (Spell.tupled, Spell.unapply)
+}
+
+val SpellAccess = TableQuery[SpellsTable]
+
+case class ClassSpell(classId: Int, spellId: Int, level: Int)
+
+class ClassSpellsTable(tag: Tag) extends Table[ClassSpell](tag, "class_spells") {
+  def classId = column[Int]("class_id")
+  def spellId = column[Int]("spell_id")
+  def level = column[Int]("level")
+
+  def pk = primaryKey("pk_class_spell", (classId, spellId))
+  def dndClass = foreignKey("class_fk", classId, TableQuery[DnDClassTable])(_.id)
+  def spell = foreignKey("spell_fk", spellId, TableQuery[SpellsTable])(_.id)
+  
+  def * = (classId, spellId, level) <> (ClassSpell.tupled, ClassSpell.unapply)
+}
+
+val ClassSpellAccess = TableQuery[ClassSpellsTable]
+
+Database.forURL("jdbc:postgresql:handbook", driver = "org.postgresql.Driver").withSession { implicit session =>
+  val bardId = ClassAccess.filter(_.name === bardData.name.trim).map(_.id).first
+  for ((level, spells) <- bardData.spells) {
+    for (spell <- spells) {
+      val spellId = SpellAccess.filter(_.name === spell.trim).map(_.id).first
+      if (! ClassSpellAccess.filter(c => c.spellId === spellId && c.classId === bardId).exists.run) {
+        ClassSpellAccess.insert(ClassSpell(bardId, spellId, level))
+      }
+    }
+  }
+}
+
