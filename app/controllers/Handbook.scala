@@ -68,6 +68,13 @@ object HandBook extends Controller {
   
   def getSpells() = getAll(Spells)
   def addSpell() = addTo(Spells)
+  def addSpells() = Action(parse.json) { request =>
+    val spells = request.body.as[Seq[Spell]]
+    DB.withSession { implicit session =>
+      spells.foreach(Spells += _)
+    }
+    Created
+  }
   
   def getClasses() = getAll(DnDClasses)
   def addClass() = addTo(DnDClasses)

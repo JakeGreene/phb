@@ -30,10 +30,10 @@ def extractSpell(full: String): Spell = {
 }
 implicit val spellWrites = Json.writes[Spell]
 val spellData = spellLines.map(extractSpell)
-val spellJson = spellData.map(d => Json.toJson(d))
-val api = url("http://localhost:9000/spells")
+val spellJson = spellData.grouped(20).map(d => Json.toJson(d))
+val api = url("http://player-handbook.herokuapp.com/spells/all")
 def apiAsJson = api.setContentType("application/json", "UTF-8")
 def apiPostWithBody(j: JsValue) = apiAsJson << j.toString
 val responses = spellJson.map(apiPostWithBody).map(request => Http(request OK as.String)).map(_.apply())
-responses.filterNot(_.isEmpty).map(println)
+responses.filterNot(_.isEmpty).foreach(println)
  
