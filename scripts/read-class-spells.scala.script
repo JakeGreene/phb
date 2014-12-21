@@ -78,7 +78,9 @@ Database.forURL("jdbc:postgresql:handbook", driver = "org.postgresql.Driver").wi
   val bardId = ClassAccess.filter(_.name === bardData.name.trim).map(_.id).first
   for ((level, spells) <- bardData.spells) {
     for (spell <- spells) {
-      val spellId = SpellAccess.filter(_.name === spell.trim).map(_.id).first
+      val spellName = spell.trim.filterNot(_ == '\'')
+      println(s"Inserting $spellName")
+      val spellId = SpellAccess.filter(_.name === spellName).map(_.id).first
       if (! ClassSpellAccess.filter(c => c.spellId === spellId && c.classId === bardId).exists.run) {
         ClassSpellAccess.insert(ClassSpell(bardId, spellId, level))
       }

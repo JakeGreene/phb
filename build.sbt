@@ -12,5 +12,6 @@ libraryDependencies ++= Seq(
   "com.h2database" % "h2" % "1.4.182", // Used during testing
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4", // Used in Heroku
   "com.typesafe.play" %% "play-slick" % "0.8.0",
+  "net.databinder.dispatch" %% "dispatch-core" % "0.11.2",
   jdbc
 )

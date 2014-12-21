@@ -15,6 +15,7 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.mvc._
 import play.api.Play.current
+import com.fasterxml.jackson.core.JsonParseException
 
 object HandBook extends Controller {
   
@@ -101,13 +102,21 @@ object HandBook extends Controller {
     Ok(Json.toJson(all))
   }
   
-  private def addTo[T: Reads](access: TableQuery[_ <: Table[T]]) = Action(parse.json) { request =>
-    val thing = request.body.asOpt[T]
-    thing.fold(BadRequest("Not a valid input")) { t =>
-      DB.withSession { implicit session =>
-        access.insert(t)
+  private def addTo[T: Reads](access: TableQuery[_ <: Table[T]]) = Action(parse.raw) { request =>
+    val s = new String(request.body.asBytes().get)
+    try {
+      val json = Json.parse(s)    
+      val parsed = json.validate[T]
+      parsed.map { t =>
+        DB.withSession { implicit session =>
+          access.insert(t)
+        }
+        Created
+      }.recoverTotal {
+        e => BadRequest("Detected error:"+ JsError.toFlatJson(e))
       }
-      Ok(s"Stored thing $t")
+    } catch {
+      case e: JsonParseException => BadRequest(s"Could not parse $s due to ${e.toString}")
     }
   }
 }
