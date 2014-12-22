@@ -1,0 +1,415 @@
+{
+    "classes": [
+        {
+            "name": "Bard",
+            "levels": [
+                {
+                    "level": 0,
+                    "spells": [
+                        "Blade Ward",
+                        "Dancing Lights",
+                        "Friends",
+                        "Light",
+                        "Mage Hand",
+                        "Mending",
+                        "Message",
+                        "Minor Illusion",
+                        "Prestidigitation",
+                        "True Strike",
+                        "Vicious Mockery"
+                    ]
+                },
+                {
+                    "level": 1,
+                    "spells": [
+                        "Animal Friendship",
+                        "Bane",
+                        "Charm Person",
+                        "Comprehend Languages",
+                        "Cure Wounds",
+                        "Detect Magic",
+                        "Disguise Self",
+                        "Dissonant Whispers",
+                        "Faerie Fire",
+                        "Feather Fall",
+                        "Healing Word",
+                        "Heroism",
+                        "Identify",
+                        "Illusory Script",
+                        "Longstrider",
+                        "Silent Image",
+                        "Sleep",
+                        "Speak with Animals",
+                        "Tasha's Hideous Laughter",
+                        "Thunderwave",
+                        "Unseen Servant"
+                    ]
+                },
+                {
+                    "level": 2,
+                    "spells": [
+                        "Animal Messenger",
+                        "Blindness / Deafness",
+                        "Calm Emotions",
+                        "Cloud of Daggers",
+                        "Crown of Madness",
+                        "Detect Thoughts",
+                        "Enhance Ability",
+                        "Enthrall",
+                        "Heat Metal",
+                        "Hold Person",
+                        "Invisibility",
+                        "Knock",
+                        "Lesser Restoration",
+                        "Locate Animals or Plants",
+                        "Locate Object",
+                        "Magic Mouth",
+                        "Phantasmal Force",
+                        "See Invisibility",
+                        "Shatter",
+                        "Silence",
+                        "Suggestion",
+                        "Zone of Truth"
+                    ]
+                },
+                {
+                    "level": 3,
+                    "spells": [
+                        "Bestow Curse",
+                        "Clairvoyance",
+                        "Dispel Magic",
+                        "Fear",
+                        "Feign Death",
+                        "Glyph of Warding",
+                        "Hypnotic Pattern",
+                        "Leomund's Tiny Hut",
+                        "Major Image",
+                        "Nondetection",
+                        "Plant Growth",
+                        "Sending",
+                        "Speak with Dead",
+                        "Speak with Plants",
+                        "Stinking Cloud",
+                        "Tongues"
+                    ]
+                },
+                {
+                    "level": 4,
+                    "spells": [
+                        "Compulsion",
+                        "Confusion",
+                        "Dimension Door",
+                        "Freedom of Movement",
+                        "Greater Invisibility",
+                        "Hallucinatory Terrain",
+                        "Locate Creature",
+                        "Polymorph"
+                    ]
+                },
+                {
+                    "level": 5,
+                    "spells": [
+                        "Animate Objects",
+                        "Awaken",
+                        "Dominate Person",
+                        "Dream",
+                        "Geas",
+                        "Greater Restoration",
+                        "Hold Monster",
+                        "Legend Lore",
+                        "Mass Cure Wounds",
+                        "Mislead",
+                        "Modify Memory",
+                        "Planar Binding",
+                        "Raise Dead",
+                        "Scrying",
+                        "Seeming",
+                        "Teleportation Circle"
+                    ]
+                },
+                {
+                    "level": 6,
+                    "spells": [
+                        "Eyebite",
+                        "Find the Path",
+                        "Guards and Wards",
+                        "Mass Suggestion",
+                        "Otto's Irresistible Dance",
+                        "Programmed Illusion",
+                        "True Seeing"
+                    ]
+                },
+                {
+                    "level": 7,
+                    "spells": [
+                        "Etherealness",
+                        "Forcecage",
+                        "Mirage Arcane",
+                        "Mordenkainen's Magnificent Mansion",
+                        "Mordenkainen's Sword",
+                        "Project Image",
+                        "Regenerate",
+                        "Resurrection",
+                        "Symbol",
+                        "Teleport"
+                    ]
+                },
+                {
+                    "level": 8,
+                    "spells": [
+                        "Dominate Monster",
+                        "Feeblemind",
+                        "Glibness",
+                        "Mind Blank",
+                        "Power Word Stun"
+                    ]
+                },
+                {
+                    "level": 9,
+                    "spells": [
+                        "Foresight",
+                        "Power Word Heal",
+                        "Power Word Kill",
+                        "True Polymorph"
+                    ]
+                }
+            ]
+        },
+        {
+          "name":"Cleric",
+          "levels": [
+            {
+              "level":0,
+              "spells": [
+                "Guidance",
+                "Light",
+                "Mending ",
+                "Resistance ",
+                "Sacred Flame ",
+                "Spare the Dying",
+                "Thaumaturgy"
+              ]
+            },
+            {
+              "level":1,
+              "spells": [
+                "Bane",
+                "Bless",
+                "Command",
+                "Create or Destroy Water",
+                "Cure Wounds",
+                "Detect Evil and Good",
+                "Detect Magic",
+                "Detect Poison and Disease",
+                "Guiding Bolt",
+                "Healing Word",
+                "Inflict Wounds",
+                "Protection from Evil and Good",
+                "Purify Food and Drink",
+                "Sanctuary",
+                "Shield of Faith"
+              ]
+            },
+            {
+              "level":2,
+              "spells": [
+                "Aid",
+                "Augury",
+                "Blindness/Deafness",
+                "Calm Emotions",
+                "Continual Flame",
+                "Enhance Ability",
+                "Find Traps",
+                "Gentle Repose",
+                "Hold Person",
+                "Lesser Restoration",
+                "Locate Object",
+                "Prayer of Healing",
+                "Protection from Poison",
+                "Silence",
+                "Spiritual Weapon",
+                "Warding Bond",
+                "Zone of Truth"
+              ]
+            },
+            {
+              "level":3,
+              "spells": [
+                "Animate Dead",
+                "Beacon of Hope",
+                "Bestow Curse",
+                "Clairvoyance",
+                "Create Food and Water",
+                "Daylight",
+                "Dispel Magic",
+                "Feign Death",
+                "Glyph of Warding",
+                "Magic Circle",
+                "Mass Healing Word",
+                "Meld into Stone",
+                "Protection from Energy",
+                "Remove Curse",
+                "Revivify",
+                "Sending",
+                "Speak with Dead",
+                "Spirit Guardians",
+                "Tongues",
+                "Water Walk"
+              ]
+            },
+            {
+              "level":4,
+              "spells": [
+                "Banishment",
+                "Control Water",
+                "Death Ward",
+                "Divination",
+                "Freedom of Movement",
+                "Guardian of Faith",
+                "Locate Creature",
+                "Stone Shape"
+              ]
+            },
+            {
+              "level":5,
+              "spells": [
+                "Commune",
+                "Contagion",
+                "Dispel Evil and Good",
+                "Flame Strike",
+                "Geas",
+                "Greater Restoration",
+                "Hallow",
+                "Insect Plague",
+                "Legend Lore",
+                "Mass Cure Wounds",
+                "Planar Binding",
+                "Raise Dead",
+                "Scrying"
+              ]
+            },
+            {
+              "level":6,
+              "spells": [
+                "Blade Barrier",
+                "Create Undead",
+                "Find the Path",
+                "Forbiddance",
+                "Harm",
+                "Heal",
+                "Heroes' Feast",
+                "Planar Ally",
+                "True Seeing",
+                "Word of Recall"
+              ]
+            },
+            {
+              "level":7,
+              "spells": [
+                "Conjure Celestial",
+                "Divine Word",
+                "Etherealness",
+                "Fire Storm",
+                "Plane Shift",
+                "Regenerate",
+                "Resurrection",
+                "Symbol"
+              ]
+            },
+            {
+              "level":8,
+              "spells": [
+                "Antimagic Field",
+                "Control Weather",
+                "Earthquake",
+                "Holy Aura"
+              ]
+            },
+            {
+              "level":9,
+              "spells": [
+                "Astral Projection",
+                "Gate",
+                "Mass Heal",
+                "True Resurrection"
+              ]
+            }
+          ]
+        },
+        {
+          "name":"Paladin",
+          "levels": [
+            {
+              "level": 1,
+              "spells": [
+                "Bless",
+                "Command",
+                "Compelled Duel",
+                "Cure Wounds",
+                "Detect Evil and Good",
+                "Detect Magic",
+                "Detect Poison and Disease",
+                "Divine Favor",
+                "Heroism",
+                "Protection from Evil and Good",
+                "Purify Food and Drink",
+                "Searing Smite",
+                "Shield of Faith",
+                "Thunderous Smite",
+                "Wrathful Smite"
+              ]
+            },
+            {
+              "level": 2,
+              "spells": [
+                "Aid",
+                "Branding Smite",
+                "Find Steed",
+                "Lesser Restoration",
+                "Locate Object",
+                "Magic Weapon",
+                "Protection from Poison",
+                "Zone of Truth"
+              ]
+            },
+            {
+              "level": 3,
+              "spells": [
+                "Aura of Vitality",
+                "Blinding Smite",
+                "Create Food and Water",
+                "Crusader's Mantle",
+                "Daylight",
+                "Dispel Magic",
+                "Elemental Weapon",
+                "Magic Circle",
+                "Remove Curse",
+                "Revivify"
+              ]
+            },
+            {
+              "level": 4,
+              "spells": [
+                "Aura of Life",
+                "Aura of Purity",
+                "Banishment",
+                "Death Ward",
+                "Locate Creature",
+                "Staggering Smite"
+              ]
+            },
+            {
+              "level": 5,
+              "spells": [
+                "Banishing Smite",
+                "Circle of Power",
+                "Destructive Smite",
+                "Dispel Evil and Good",
+                "Geas",
+                "Raise Dead"
+              ]
+            }
+          ]
+      }
+  ]
+}
