@@ -74,7 +74,7 @@ class ClassSpellsTable(tag: Tag) extends Table[ClassSpell](tag, "class_spells") 
 
 val ClassSpellAccess = TableQuery[ClassSpellsTable]
 
-Database.forURL("jdbc:postgresql:handbook", driver = "org.postgresql.Driver").withSession { implicit session =>
+Database.forURL("postgres://vinyysatahphch:ysCs3Hir8Hs_t-wYAFJckfn1QI@ec2-54-243-51-102.compute-1.amazonaws.com:5432/d5nflkq2serqql", driver = "org.postgresql.Driver").withSession { implicit session =>
   val bardId = ClassAccess.filter(_.name === bardData.name.trim).map(_.id).first
   for ((level, spells) <- bardData.spells) {
     for (spell <- spells) {

@@ -101,6 +101,18 @@ object HandBook extends Controller {
     Ok(s"Stored spell $spellId")
   }
   
+  case class SpellLevel(id: Int, level: Int)
+  implicit val spellLevelReads = Json.reads[SpellLevel]
+  def addClassSpells(classId: Int) = Action(parse.json) { request =>
+    val classSpells = request.body.as[Seq[SpellLevel]]
+    DB.withSession { implicit session =>
+      for (spell <- classSpells) {
+        ClassSpells.insert(ClassSpell(classId, spell.id, spell.level ))
+      }  
+    }
+    Created
+  }
+  
   def getRaces() = getAll(Races)
   def addRace() = addTo(Races)
   
@@ -112,7 +124,7 @@ object HandBook extends Controller {
   private def addTo[T: Reads](access: TableQuery[_ <: Table[T]]) = Action(parse.raw) { request =>
     val s = new String(request.body.asBytes().get)
     try {
-      val json = Json.parse(s)    
+      val json = Json.parse(s)   
       val parsed = json.validate[T]
       parsed.map { t =>
         DB.withSession { implicit session =>
