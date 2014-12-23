@@ -215,7 +215,7 @@
               "spells": [
                 "Aid",
                 "Augury",
-                "Blindness/Deafness",
+                "Blindness / Deafness",
                 "Calm Emotions",
                 "Continual Flame",
                 "Enhance Ability",
@@ -403,13 +403,178 @@
               "spells": [
                 "Banishing Smite",
                 "Circle of Power",
-                "Destructive Smite",
+                "Destructive Wave",
                 "Dispel Evil and Good",
                 "Geas",
                 "Raise Dead"
               ]
             }
           ]
+      },
+      {
+        "name": "Druid",
+        "levels": [
+          {
+            "level": 0,
+            "spells": [
+              "Druidcraft",
+              "Guidance",
+              "Mending",
+              "Poison Spray",
+              "Produce Flame",
+              "Resistance",
+              "Shillelagh",
+              "Thorn Whip"
+            ]
+          },
+          {
+            "level": 1,
+            "spells": [
+              "Animal Friendship",
+              "Charm Person",
+              "Create or Destroy Water",
+              "Cure Wounds",
+              "Detect Magic",
+              "Detect Poison and Disease",
+              "Entangle",
+              "Faerie Fire",
+              "Fog Cloud",
+              "Goodberry",
+              "Healing Word",
+              "Jump",
+              "Longstrider",
+              "Purify Food and Drink",
+              "Speak with Animals",
+              "Thunderwave"
+             ]
+          },
+          {
+            "level": 2,
+            "spells": [
+              "Animal Messenger",
+              "Barkskin",
+              "Beast Sense",
+              "Darkvision",
+              "Enhance Ability",
+              "Find Traps",
+              "Flame Blade",
+              "Flaming Sphere",
+              "Gust of Wind",
+              "Heat Metal",
+              "Hold Person",
+              "Lesser Restoration",
+              "Locate Animals or Plants",
+              "Locate Object",
+              "Moonbeam",
+              "Pass without Trace",
+              "Protection from Poison",
+              "Spike Growth"
+            ]
+          },
+          {
+            "level": 3,
+            "spells": [
+              "Call Lightning",
+              "Conjure Animals",
+              "Daylight",
+              "Dispel Magic",
+              "Feign Death",
+              "Meld into Stone",
+              "Plant Growth",
+              "Protection from Energy",
+              "Sleet Storm",
+              "Speak with Plants",
+              "Water Breathing",
+              "Water Walk",
+              "Wind Wall"
+            ]
+          },
+          {
+            "level": 4,
+            "spells": [
+              "Blight",
+              "Confusion",
+              "Conjure Minor Elementals",
+              "Conjure Woodland Beings",
+              "Control Water",
+              "Dominate Beast",
+              "Freedom of Movement",
+              "Giant Insect",
+              "Grasping Vine",
+              "Hallucinatory Terrain",
+              "Ice Storm",
+              "Locate Creature",
+              "Polymorph",
+              "Stone Shape",
+              "Stoneskin",
+              "Wall of Fire"
+            ]
+          },
+          {
+            "level": 5,
+            "spells": [
+              "Antilife Shell",
+              "Awaken",
+              "Commune with Nature",
+              "Conjure Elemental",
+              "Contagion",
+              "Geas",
+              "Greater Restoration",
+              "Insect Plague",
+              "Mass Cure Wounds",
+              "Planar Binding",
+              "Reincarnate",
+              "Scrying",
+              "Tree Stride",
+              "Wall of Stone"
+            ]
+          },
+          {
+            "level": 6,
+            "spells": [
+              "Conjure Fey",
+              "Find the Path",
+              "Heal",
+              "Heroes Feast",
+              "Move Earth",
+              "Sunbeam",
+              "Transport via Plants",
+              "Wall of Thorns",
+              "Wind Walk"
+            ]
+          },
+          {
+            "level": 7,
+            "spells": [
+              "Fire Storm",
+              "Mirage Arcane",
+              "Plane Shift",
+              "Regenerate",
+              "Reverse Gravity"
+            ]
+          },
+          {
+            "level": 8,
+            "spells": [
+              "Animal Shapes",
+              "Antipathy / Sympathy",
+              "Control Weather",
+              "Earthquake",
+              "Feeblemind",
+              "Sunburst",
+              "Tsunami"
+            ]
+          },
+          {
+            "level": 9,
+            "spells": [
+              "Foresight",
+              "Shapechange",
+              "Storm of Vengeance",
+              "True Resurrection"
+            ]
+          }
+        ]
       }
   ]
 }

@@ -27,7 +27,7 @@ object ReadClassSpells {
     (classData \ "classes").as[Seq[ClassSpells]]
   }
 
-  def readClassSpells(host: String): Unit = {
+  def apply(host: String = "http://localhost:9000"): Unit = {
     val classSpellSource = Source.fromFile("data/class-spells.json")
     val allClassData = parseClassData(classSpellSource)
     
@@ -35,28 +35,32 @@ object ReadClassSpells {
     def spellApi = url(s"${baseUrl}/spells")
     def classApi = url(s"${baseUrl}/classes")
 
-    allClassData.foreach { classSpells =>
-      println(s"{classSpells.name} has ${classSpells.levels.map(_.spells.size).sum} spells")
+    allClassData.foreach { classData =>
+      val numSpells = classData.levels.map(_.spells.size).sum
+      println(s"${classData.name} has ${numSpells} spells")
       val spellResponse = Http(spellApi OK as.String).apply()
       val spells = Json.parse(spellResponse).as[Seq[Spell]]
 
       val classResponse = Http(classApi OK as.String).apply()
       val classes = Json.parse(classResponse).as[Seq[DnDClass]]
 
-      val bardId = classes.find(_.name.trim == classSpells.name.trim).flatMap(_.id).get
+      val classId = classes.find(_.name.trim == classData.name.trim).flatMap(_.id).get
 
-      val bardLevelsByName = classSpells.levels.map { levelSpells => 
+      val classLevelsByName = classData.levels.map { levelSpells => 
         val level = levelSpells.level
         val names = levelSpells.spells
         names.map(level -> _)
       }.flatten.map { case (lvl, name) => 
         name.trim.filterNot(_ == '\'') -> lvl 
       }.toMap
+      if (classLevelsByName.keys.size != numSpells) println(s"Started $numSpells but have ${classLevelsByName.keys.size}")
       
-      val bardSpells = spells.filter(s => bardLevelsByName.contains(s.name.trim))
+      val classFullSpells = spells.filter(s => classLevelsByName.contains(s.name.trim))
+      val notFound = classFullSpells.map(_.name).toSet.diff(classLevelsByName.keySet)
+      if (notFound.nonEmpty) println(s"${classData.name} missing $notFound")
 
-      val classSpellGroups = bardSpells.map(s => SpellLevel(s.id.get, bardLevelsByName(s.name))).grouped(20).map(s => Json.toJson(s))
-      def classSpellApi = url(s"${baseUrl}/classes/${bardId}/spells/all")
+      val classSpellGroups = classFullSpells.map(s => SpellLevel(s.id.get, classLevelsByName(s.name))).grouped(20).map(s => Json.toJson(s))
+      def classSpellApi = url(s"${baseUrl}/classes/${classId}/spells/all")
       def classSpellJsonApi = classSpellApi.setContentType("application/json", "UTF-8")
       def sendClassSpell(j: JsValue) = classSpellJsonApi << j.toString
       val responses = Future.sequence(classSpellGroups.map(sendClassSpell).map(request => Http(request OK as.String)))
