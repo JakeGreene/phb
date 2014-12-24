@@ -575,6 +575,82 @@
             ]
           }
         ]
+      },
+      {
+        "name":"Ranger",
+        "levels": [
+          {
+            "level":1,
+            "spells": [
+              "Alarm",
+              "Animal Friendship",
+              "Cure Wounds",
+              "Detect Magic",
+              "Detect Poison and Disease",
+              "Ensnaring Strike",
+              "Fog Cloud",
+              "Goodberry",
+              "Hail of Thorns",
+              "Hunters Mark",
+              "Jump",
+              "Longstrider",
+              "Speak with Animals "
+            ]
+          },
+          {
+            "level":2,
+            "spells": [
+              "Animal Messenger",
+              "Barkskin",
+              "Beast Sense",
+              "Cordon of Arrows",
+              "Darkvision",
+              "Find Traps",
+              "Lesser Restoration",
+              "Locate Animals or Plants",
+              "Locate Object",
+              "Pass without Trace",
+              "Protection from Poison",
+              "Silence",
+              "Spike Growth"
+            ]
+          },
+          {
+            "level":3,
+            "spells": [
+              "Conjure Animals",
+              "Conjure Barrage",
+              "Daylight",
+              "Lightning Arrow",
+              "Nondetection",
+              "Plant Growth",
+              "Protection from Energy",
+              "Speak with Plants",
+              "Water Breathing",
+              "Water Walk",
+              "Wind Wall"
+            ]
+          },
+          {
+            "level":4,
+            "spells": [
+              "Conjure Woodland Beings",
+              "Freedom of Movement",
+              "Grasping Vine",
+              "Locate Creature",
+              "Stoneskin"
+            ]
+          },
+          {
+            "level":5,
+            "spells": [
+              "Commune with Nature",
+              "Conjure Volley",
+              "Swift Quiver",
+              "Tree Stride"
+            ]
+          }
+        ]
       }
   ]
 }

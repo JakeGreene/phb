@@ -6,11 +6,12 @@
 @main(title = "Create PHB") {
   <h1>Personal Player's Handbook</h1>
 
-  @form(action = routes.HandBook.phb(), '_label -> "Classes") {
+  @form(action = routes.HandBook.phb()) {
     @{
     inputCheckboxGroup (
       phbForm("classes"),
       classes.map(c => c.id.get.toString -> c.name),
+      '_label -> "Classes",
       '_error -> phbForm("classes").error.map(_.withMessage("select classes")))
     }
     <input type='submit' name='submit' value='Create Handbook' />
