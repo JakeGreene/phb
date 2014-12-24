@@ -651,6 +651,589 @@
             ]
           }
         ]
+      },
+      {
+        "name":"Sorcerer",
+        "levels": [
+          {
+            "level": 0,
+            "spells": [
+              "Acid Splash",
+              "Blade Ward",
+              "Chill Touch",
+              "Dancing Lights",
+              "Fire Bolt",
+              "Friends",
+              "Light",
+              "Mage Hand",
+              "Mending",
+              "Message",
+              "Minor Illusion",
+              "Poison Spray",
+              "Prestidigitation",
+              "Ray of Frost",
+              "Shocking Grasp",
+              "True Strike"
+            ]
+          },
+          {
+            "level":1,
+            "spells": [
+              "Burning Hands",
+              "Charm Person",
+              "Chromatic Orb",
+              "Color Spray",
+              "Comprehend Languages",
+              "Detect Magic",
+              "Disguise Self",
+              "Expeditious Retreat",
+              "False Life",
+              "Feather Fall",
+              "Fog Cloud",
+              "Jump",
+              "Mage Armor",
+              "Magic Missile",
+              "Ray of Sickness",
+              "Shield",
+              "Silent Image",
+              "Sleep",
+              "Thunderwave",
+              "Witch Bolt"
+            ]
+          },
+          {
+            "level":2,
+            "spells": [
+              "Alter Self",
+              "Blindness / Deafness",
+              "Blur",
+              "Cloud of Daggers",
+              "Crown of Madness",
+              "Darkness",
+              "Darkvision",
+              "Detect Thoughts",
+              "Enhance Ability",
+              "Enlarge / Reduce",
+              "Gust of Wind",
+              "Hold Person",
+              "Invisibility",
+              "Knock",
+              "Levitate",
+              "Mirror Image",
+              "Misty Step",
+              "Phantasmal Force",
+              "Scorching Ray",
+              "See Invisibility",
+              "Shatter",
+              "Spider Climb",
+              "Suggestion",
+              "Web"
+            ]
+          },
+          {
+            "level":3,
+            "spells": [
+              "Blink",
+              "Clairvoyance",
+              "Counterspell",
+              "Daylight",
+              "Dispel Magic",
+              "Fear",
+              "Fireball",
+              "Fly",
+              "Gaseous Form",
+              "Haste",
+              "Hypnotic Pattern",
+              "Lightning Bolt",
+              "Major Image",
+              "Protection from Energy",
+              "Sleet Storm",
+              "Slow",
+              "Stinking Cloud",
+              "Tongues",
+              "Water Breathing",
+              "Water Walk"
+            ]
+          },
+          {
+            "level":4,
+            "spells": [
+              "Banishment",
+              "Blight",
+              "Confusion",
+              "Dimension Door",
+              "Dominate Beast",
+              "Greater Invisibility",
+              "Ice Storm",
+              "Polymorph",
+              "Stoneskin",
+              "Wall of Fire"
+            ]
+          },
+          {
+            "level":5,
+            "spells": [
+              "Animate Objects",
+              "Cloudkill",
+              "Cone of Cold",
+              "Creation",
+              "Dominate Person",
+              "Hold Monster",
+              "Insect Plague",
+              "Seeming",
+              "Telekinesis",
+              "Teleportation Circle",
+              "Wall of Stone"
+            ]
+          },
+          {
+            "level":6,
+            "spells": [
+              "Arcane Gate",
+              "Chain Lightning",
+              "Circle of Death",
+              "Disintegrate",
+              "Eyebite",
+              "Globe of Invulnerability",
+              "Mass Suggestion",
+              "Move Earth",
+              "Sunbeam",
+              "True Seeing"
+            ]
+          },
+          {
+            "level":7,
+            "spells": [
+              "Delayed Blast Fireball",
+              "Etherealness",
+              "Finger of Death",
+              "Fire Storm",
+              "Plane Shift",
+              "Prismatic Spray",
+              "Reverse Gravity",
+              "Teleport"
+            ]
+          },
+          {
+            "level":8,
+            "spells": [
+              "Dominate Monster",
+              "Earthquake",
+              "Incendiary Cloud",
+              "Power Word Stun",
+              "Sunburst"
+            ]
+          },
+          {
+            "level":9,
+            "spells": [
+              "Gate",
+              "Meteor Swarm",
+              "Power Word Kill",
+              "Time Stop",
+              "Wish"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Warlock",
+        "levels": [
+          {
+            "level":0,
+            "spells": [
+              "Blade Ward",
+              "Chill Touch",
+              "Eldritch Blast",
+              "Friends",
+              "Mage Hand",
+              "Minor Illusion",
+              "Poison Spray",
+              "Prestidigitation",
+              "True Strike"
+            ]
+          },
+          {
+            "level":1,
+            "spells": [
+              "Armor of Agathys",
+              "Arms of Hadar",
+              "Charm Person",
+              "Comprehend Languages",
+              "Expeditious Retreat",
+              "Hellish Rebuke",
+              "Hex",
+              "Illusory Script",
+              "Protection from Evil and Good",
+              "Unseen Servant",
+              "Witch Bolt"
+            ]
+          },
+          {
+            "level":2,
+            "spells": [
+              "Cloud of Daggers",
+              "Crown of Madness",
+              "Darkness",
+              "Enthrall",
+              "Hold Person",
+              "Invisibility",
+              "Mirror Image",
+              "Misty Step",
+              "Ray of Enfeeblement",
+              "Shatter",
+              "Spider Climb",
+              "Suggestion"
+            ]
+          },
+          {
+            "level":3,
+            "spells": [
+              "Counterspell",
+              "Dispel Magic",
+              "Fear",
+              "Fly",
+              "Gaseous Form",
+              "Hunger of Hadar",
+              "Hypnotic Pattern",
+              "Magic Circle",
+              "Major Image",
+              "Remove Curse",
+              "Tongues",
+              "Vampiric Touch"
+            ]
+          },
+          {
+            "level":4,
+            "spells": [
+              "Banishment",
+              "Blight",
+              "Dimension Door",
+              "Hallucinatory Terrain"
+            ]
+          },
+          {
+            "level":5,
+            "spells": [
+              "Contact Other Plane",
+              "Dream",
+              "Hold Monster",
+              "Scrying"
+            ]
+          },
+          {
+            "level":6,
+            "spells": [
+              "Arcane Gate",
+              "Circle of Death",
+              "Conjure Fey",
+              "Create Undead",
+              "Eyebite",
+              "Flesh to Stone",
+              "Mass Suggestion",
+              "True Seeing"
+            ]
+          },
+          {
+            "level":7,
+            "spells": [
+              "Etherealness",
+              "Finger of Death",
+              "Forcecage",
+              "Plane Shift"
+            ]
+          },
+          {
+            "level":8,
+            "spells": [
+              "Demiplane",
+              "Dominate Monster",
+              "Feeblemind",
+              "Glibness",
+              "Power Word Stun"
+            ]
+          },
+          {
+            "level":9,
+            "spells": [
+              "Astral Projection",
+              "Foresight",
+              "Imprisonment",
+              "Power Word Kill",
+              "True Polymorph"
+            ]
+          }
+        ]
+      },
+      {
+        "name":"Wizard",
+        "levels": [
+          {
+            "level":0,
+            "spells": [
+              "Acid Splash",
+              "Blade Ward",
+              "Chill Touch",
+              "Dancing Lights",
+              "Fire Bolt",
+              "Friends",
+              "Light",
+              "Mage Hand",
+              "Mending",
+              "Message",
+              "Minor Illusion",
+              "Poison Spray",
+              "Prestidigitation",
+              "Ray of Frost",
+              "Shocking Grasp",
+              "True Strike"
+            ]
+          },
+          {
+            "level":1,
+            "spells": [
+              "Alarm",
+              "Burning Hands",
+              "Charm Person",
+              "Chromatic Orb",
+              "Color Spray",
+              "Comprehend Languages",
+              "Detect Magic",
+              "Disguise Self",
+              "Expeditious Retreat",
+              "False Life",
+              "Feather Fall",
+              "Find Familiar",
+              "Fog Cloud",
+              "Grease",
+              "Identify",
+              "Illusory Script",
+              "Jump",
+              "Longstrider",
+              "Mage Armor",
+              "Magic Missile",
+              "Protection from Evil and Good",
+              "Ray of Sickness",
+              "Shield",
+              "Silent Image",
+              "Sleep",
+              "Tashas Hideous Laughter",
+              "Tensers Floating Disk",
+              "Thunderwave",
+              "Unseen Servant",
+              "Witch Bolt"
+            ]
+          },
+          {
+            "level":2,
+            "spells": [
+              "Alter Self",
+              "Arcane Lock",
+              "Blindness / Deafness",
+              "Blur",
+              "Cloud of Daggers",
+              "Continual Flame",
+              "Crown of Madness",
+              "Darkness",
+              "Darkvision",
+              "Detect Thoughts",
+              "Enlarge / Reduce",
+              "Flaming Sphere",
+              "Gentle Repose",
+              "Gust of Wind",
+              "Hold Person",
+              "Invisibility",
+              "Knock",
+              "Levitate",
+              "Locate Object",
+              "Magic Mouth",
+              "Magic Weapon",
+              "Melf's Acid Arrow",
+              "Mirror Image",
+              "Misty Step",
+              "Nystuls Magic Aura",
+              "Phantasmal Force",
+              "Ray of Enfeeblement",
+              "Rope Trick",
+              "Scorching Ray",
+              "See Invisibility",
+              "Shatter",
+              "Spider Climb",
+              "Suggestion",
+              "Web"
+            ]
+          },
+          {
+            "level":3,
+            "spells": [
+              "Animate Dead",
+              "Bestow Curse",
+              "Blink",
+              "Clairvoyance",
+              "Counterspell",
+              "Dispel Magic",
+              "Fear",
+              "Feign Death",
+              "Fireball",
+              "Fly",
+              "Gaseous Form",
+              "Glyph of Warding",
+              "Haste",
+              "Hypnotic Pattern",
+              "Leomunds Tiny Hut",
+              "Lightning Bolt",
+              "Magic Circle",
+              "Major Image",
+              "Nondetection",
+              "Phantom Steed",
+              "Protection from Energy",
+              "Remove Curse",
+              "Sending",
+              "Sleet Storm",
+              "Slow",
+              "Stinking Cloud",
+              "Tongues",
+              "Vampiric Touch",
+              "Water Breathing"
+            ]
+          },
+          {
+            "level":4,
+            "spells": [
+              "Arcane Eye",
+              "Banishment",
+              "Blight",
+              "Confusion",
+              "Conjure Minor Elementals",
+              "Control Water",
+              "Dimension Door",
+              "Evards Black Tentacles",
+              "Fabricate",
+              "Fire Shield",
+              "Greater Invisibility",
+              "Hallucinatory Terrain",
+              "Ice Storm",
+              "Leomunds Secret Chest",
+              "Locate Creature",
+              "Mordenkainens Faithful Hound",
+              "Mordenkainens Private Sanctum",
+              "Otilukes Resilient Sphere",
+              "Phantasmal Killer",
+              "Polymorph",
+              "Stone Shape",
+              "Stoneskin",
+              "Wall of Fire"
+            ]
+          },
+          {
+            "level":5,
+            "spells": [
+              "Animate Objects",
+              "Bigbys Hand",
+              "Cloudkill",
+              "Cone of Cold",
+              "Conjure Elemental",
+              "Contact Other Plane",
+              "Creation",
+              "Dominate Person",
+              "Dream",
+              "Geas",
+              "Hold Monster",
+              "Legend Lore",
+              "Mislead",
+              "Modify Memory",
+              "Passwall",
+              "Planar Binding",
+              "Rarys Telepathic Bond",
+              "Scrying",
+              "Seeming",
+              "Telekinesis",
+              "Teleportation Circle",
+              "Wall of Force",
+              "Wall of Stone"
+            ]
+          },
+          {
+            "level":6,
+            "spells": [
+              "Arcane Gate",
+              "Chain Lightning",
+              "Circle of Death",
+              "Contingency",
+              "Create Undead",
+              "Disintegrate",
+              "Drawmijs Instant Summons",
+              "Eyebite",
+              "Flesh to Stone",
+              "Globe of Invulnerability",
+              "Guards and Wards",
+              "Magic Jar",
+              "Mass Suggestion",
+              "Move Earth",
+              "Otilukes Freezing Sphere",
+              "Ottos Irresistible Dance",
+              "Programmed Illusion",
+              "Sunbeam",
+              "True Seeing",
+              "Wall of Ice"
+            ]
+          },
+          {
+            "level":7,
+            "spells": [
+              "Delayed Blast Fireball",
+              "Etherealness",
+              "Finger of Death",
+              "Forcecage",
+              "Mirage Arcane",
+              "Mordenkainens Magnificent Mansion",
+              "Mordenkainens Sword",
+              "Plane Shift",
+              "Prismatic Spray",
+              "Project Image",
+              "Reverse Gravity",
+              "Sequester",
+              "Simulacrum",
+              "Symbol",
+              "Teleport"
+            ]
+          },
+          {
+            "level":8,
+            "spells": [
+              "Antimagic Field",
+              "Antipathy / Sympathy",
+              "Clone",
+              "Control Weather",
+              "Demiplane",
+              "Dominate Monster",
+              "Feeblemind",
+              "Incendiary Cloud",
+              "Maze",
+              "Mind Blank",
+              "Power Word Stun",
+              "Sunburst",
+              "Telepathy"
+            ]
+          },
+          {
+            "level":9,
+            "spells": [
+              "Astral Projection",
+              "Foresight",
+              "Gate",
+              "Imprisonment",
+              "Meteor Swarm",
+              "Power Word Kill",
+              "Prismatic Wall",
+              "Shapechange",
+              "Time Stop",
+              "True Polymorph",
+              "Weird",
+              "Wish"
+            ]
+          }
+        ]
       }
   ]
 }
