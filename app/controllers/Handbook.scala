@@ -13,9 +13,12 @@ import play.api.db.slick._
 import play.api.db.slick.Config.driver.simple._
 import play.api.data._
 import play.api.data.Forms._
+import play.api.data.validation.Constraints._
 import play.api.mvc._
 import play.api.Play.current
 import com.fasterxml.jackson.core.JsonParseException
+
+case class PhbData(selectedClasses: List[Int])
 
 object HandBook extends Controller {
   
@@ -37,21 +40,26 @@ object HandBook extends Controller {
                        Font(PDType1Font.TIMES_ITALIC, 12),
                        Font(PDType1Font.TIMES_BOLD, 12),
                        Font(PDType1Font.TIMES_ROMAN, 12))
+
+  val phbForm = Form (
+    mapping (
+      "classes" -> list(number)  
+    )(PhbData.apply)(PhbData.unapply)  
+  )
   
   def index() = Action {
     DB.withSession { implicit session => 
       val classes = DnDClasses.run
       val races = Races.run
-      Ok(views.html.Handbook.index(races, classes))
+      Ok(views.html.Handbook.index(phbForm, classes))
     }
   }
   
   def phb() = DBAction { implicit rs =>
+    val submission = phbForm.bindFromRequest.get // Should fold for errors
     val builder = new HandbookBuilder(fonts, 52, 13, 2)
     builder.start()
-    val spellsByName = Spells.list.sortWith { case (a, b) =>
-      a.name < b.name
-    }
+    val spellsByName = classSpells(submission.selectedClasses: _*)
     
     spellsByName.foreach { spell =>
       builder.addSpell(spell)
@@ -80,15 +88,21 @@ object HandBook extends Controller {
   def addClass() = addTo(DnDClasses)
   
   def getClassSpells(classId: Int) = DBAction { implicit rs =>
-    val spells = for {
-      dndClass <- DnDClasses 
-      if dndClass.id === classId
-      classSpell <- ClassSpells 
-      if classSpell.classId === dndClass.id
-      spell <- Spells 
-      if spell.id === classSpell.spellId
-    } yield spell
-    Ok(Json.toJson(spells.list))
+    Ok(Json.toJson(classSpells(classId)))
+  }
+  
+  def classSpells(ids: Int*): Seq[Spell] = {
+    DB.withSession { implicit session =>
+      val spells = for {
+        dndClass <- DnDClasses 
+        if dndClass.id inSetBind ids
+        classSpell <- ClassSpells 
+        if classSpell.classId === dndClass.id
+        spell <- Spells 
+        if spell.id === classSpell.spellId
+      } yield spell
+      spells.sortBy(_.name).list
+    }
   }
   
   def addClassSpell(classId: Int) = Action(parse.json) { request =>

@@ -1,27 +1,18 @@
-@(races: Seq[Race], classes: Seq[DnDClass])
+@(phbForm: Form[PhbData], classes: Seq[DnDClass])
+
+@import helper._
+@import helper.twitterBootstrap._
+
 @main(title = "Create PHB") {
   <h1>Personal Player's Handbook</h1>
-  
-  <h3>Choose your Races</h3>
-  @for(raceGroup <- races.grouped(3)) {
-    <p>
-      @checkboxes(raceGroup.map(_.name))
-    </p>
-  }
 
-  <h3>Choose your Classes</h3>
-  @for(classGroup <- classes.grouped(3)) {
-    <p>
-      @checkboxes(classGroup.map(_.name))
-    </p>
-  }
-  <p><a class="btn btn-default" href="/phb" target="_blank">Create Player Handbook</a></p>
-}
-
- @checkboxes(options: Seq[String]) = {
-    @for(o <- options) {
-      <label class="checkbox-inline">
-        <input type="checkbox" value="@o.toString()">@o.toString() 
-      </label>
+  @form(action = routes.HandBook.phb(), '_label -> "Classes") {
+    @{
+    inputCheckboxGroup (
+      phbForm("classes"),
+      classes.map(c => c.id.get.toString -> c.name),
+      '_error -> phbForm("classes").error.map(_.withMessage("select classes")))
     }
+    <input type='submit' name='submit' value='Create Handbook' />
   }
+}
