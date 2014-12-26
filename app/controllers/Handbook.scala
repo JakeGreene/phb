@@ -95,13 +95,13 @@ object HandBook extends Controller {
     DB.withSession { implicit session =>
       val spells = for {
         dndClass <- DnDClasses 
-        if dndClass.id inSetBind ids
+        if dndClass.id inSet ids
         classSpell <- ClassSpells 
         if classSpell.classId === dndClass.id
         spell <- Spells 
         if spell.id === classSpell.spellId
       } yield spell
-      spells.sortBy(_.name).list
+      spells.sortBy(_.name).list.distinct
     }
   }
   
